@@ -1,10 +1,11 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
+    // holds reference to docker image
+    def dockerImage
+    // ip address of the docker private repository(nexus)
+
+    def dockerRepoUrl = "639760561846.dkr.ecr.us-east-1.amazonaws.com/docker-aws-repository"
+    def dockerImageName = "spring-boot-docker-image"
+    def dockerImageTag = "${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}"
     stages {
         stage('Build') {
             steps {
@@ -16,9 +17,19 @@ pipeline {
                 sh 'mvn -f complete/pom.xml test'
             }
         }
-        stage('Deliver') {
+        stage('Build Docker Image') {
             steps {
-                sh 'java -jar complete/target/gs-spring-boot-0.1.0.jar'
+                sh "mv complete/target/gs-spring-boot-*.jar ./data"
+                sh 'cd complete'
+                dockerImage = docker.build("spring-boot-docker-image")
+            }
+        }
+        stage('Publish Docker Image') {
+            steps {
+                echo "Docker Image Tag Name: ${dockerImageTag}"
+                sh "docker login -u admin -p admin123 ${dockerRepoUrl}"
+                sh "docker tag ${dockerImageName} ${dockerImageTag}"
+                sh "docker push ${dockerImageTag}"
             }
         }
     }
