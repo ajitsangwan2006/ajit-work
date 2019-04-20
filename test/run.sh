@@ -6,7 +6,7 @@ cd ../complete
 mvn clean package
 java -jar target/gs-spring-boot-0.1.0.jar
 
-rm -rf target
+sudo rm -rf target
 
 #./gradlew build
 #ret=$?
