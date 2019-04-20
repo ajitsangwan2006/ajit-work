@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sudo sh 'test/run.sh'
+                sh 'test/run.sh'
             }
         }
     }
