@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sudo sh 'test/run.sh'
+                sh 'java -jar complete/target/gs-spring-boot-0.1.0.jar'
             }
         }
     }
