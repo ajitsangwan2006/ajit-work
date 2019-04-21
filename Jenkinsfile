@@ -16,9 +16,9 @@ node {
     }
     stage('Build Docker Image') {
       steps {
-        sh 'mv complete/target/gs-spring-boot-*.jar ./data
+        sh 'mv complete/target/gs-spring-boot-*.jar ./data'
 
-        dockerImage = docker.build("spring-boot-docker-image")'
+        dockerImage = docker.build("spring-boot-docker-image")
       }
     }
     stage('Publish Docker Image') {
