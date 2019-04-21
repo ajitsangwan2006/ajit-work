@@ -11,7 +11,7 @@ node {
         sh 'mvn -f complete/pom.xml -B -DskipTests clean package'
     }
     stage('Build Docker Image') {
-        sh 'mv complete/target/gs-spring-boot-*.jar ./data/'
+        #sh 'mv complete/target/gs-spring-boot-*.jar ./data/'
 
         dockerImage = docker.build("spring-boot-docker-image")
     }

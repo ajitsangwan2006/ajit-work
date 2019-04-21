@@ -11,4 +11,4 @@ EXPOSE 9090
 CMD java -jar /data/gs-spring-boot-0.1.0.jar
 
 #copy hello world to docker image
-ADD ./data/gs-spring-boot-0.1.0.jar /data/gs-spring-boot-0.1.0.jar
+ADD ./complete/target/gs-spring-boot-0.1.0.jar /data/gs-spring-boot-0.1.0.jar
