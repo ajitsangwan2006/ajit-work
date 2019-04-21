@@ -7,9 +7,6 @@ node {
     stage('Build') {
         sh 'mvn -f complete/pom.xml -B -DskipTests clean package'
     }
-    stage('Test') {
-        sh 'mvn -f complete/pom.xml test'
-    }
     stage('Build Docker Image') {
         sh 'mv complete/target/gs-spring-boot-*.jar ./data'
 
