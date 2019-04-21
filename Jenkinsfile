@@ -4,6 +4,9 @@ node {
     def dockerRepoUrl = '639760561846.dkr.ecr.us-east-1.amazonaws.com/docker-aws-repository'
     def dockerImageName = 'spring-boot-docker-image'
     def dockerImageTag = '${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}'
+    stage('Clone Repo') {
+          git 'https://github.com/ajitsangwan2006/ajit-work.git'
+        }
     stage('Build') {
         sh 'mvn -f complete/pom.xml -B -DskipTests clean package'
     }
